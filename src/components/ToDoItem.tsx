@@ -1,0 +1,43 @@
+import React, { useState } from 'react';
+import { CheckSquare, Square, Trash } from 'lucide-react';
+
+interface Props {
+    label: string;
+    isChecked: boolean;
+    onChecked: () => void;
+    onDelete: () => void;
+}
+
+const ToDoItem = ({ label, isChecked, onChecked, onDelete }: Props) => {
+
+    const deleteHandler = () => {
+        const deleteAlert = window.confirm('정말 삭제하시겠습니까?');
+        if (deleteAlert) {
+            onDelete();
+        }
+    };
+
+    return (
+        <div className="flex items-center justify-between border-b border-[var(--gray-1)] hover:border-[var(--gray-2)] bg-white p-4">
+            <div className="flex items-center gap-3">
+
+                {/* 체크박스 버튼 */}
+                <button onClick={onChecked} className="cursor-pointer text-[var(--check-box)] hover:text-[var(--check-box)] transition">
+                    {isChecked ? <CheckSquare size={24} /> : <Square size={24} />}
+                </button>
+
+                {/* 할 일 텍스트 */}
+                <span className={`text-md ${isChecked ? 'line-through text-[var(--gray-1)]' : 'text-[var(--text)]'}`}>
+                    {label}
+                </span>
+            </div>
+
+            {/* 삭제 버튼 */}
+            <button onClick={deleteHandler} className="cursor-pointer text-[var(--gray-2)] hover:text-red-500 transition">
+                <Trash size={24} />
+            </button>
+        </div>
+    );
+};
+
+export default ToDoItem;

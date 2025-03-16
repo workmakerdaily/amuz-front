@@ -1,15 +1,33 @@
+@import url("https://fonts.googleapis.com/earlyaccess/nanummyeongjo.css");
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+  font-family: 'Pretendard';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+body {
+  font-family: 'Pretendard', sans-serif;
+  background-color: var(--background);
+  color: black;
+}
+
+:root {
+  --background: rgba(251, 249, 244, 1);
+  --side-background: rgba(100, 75, 65, 1);
+  --button: rgba(93, 64, 55, 1);
+  --hover-button: rgba(73, 50, 43, 1);
+  --input: rgba(0, 0, 0, 0.3);
+  --focus-input: rgba(0, 0, 0, 1);
+  --text: rgba(0, 0, 0, 1);
+  --gray-1: rgba(170, 170, 170, 0.9);
+  --gray-2: rgba(60, 60, 60, 0.8);
+  --text-link: rgba(204, 119, 34, 1);
+  --check-box: rgba(175, 149, 92, 1);
+  --clear: rgba(34, 139, 34, 1);
+  --error: rgba(220, 20, 60, 1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,8 +37,6 @@
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.title-font {
+  font-family: 'nanummyeongjo', sans-serif;
 }
