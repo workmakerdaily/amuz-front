@@ -44,12 +44,12 @@ const TopBar = () => {
             </header>
 
             {isOpen && (
-                <nav className="fixed top-[50px] left-0 w-full bg-[var(--side-background)] text-[rgba(255,245,235,1)] 
+                <nav className="fixed top-[50px] left-0 w-full md:hidden bg-[var(--side-background)] text-[rgba(255,245,235,1)] 
                     p-2 z-30">
                     <ul className="space-y-3">
                         <li>
                             <Link href="/main"
-                                className={`title-font flex py-2 px-2 text-sm font-semibold items-center
+                                className={`title-font flex px-2 pt-2 pb-1 text-sm font-semibold items-center justify-center
                                     ${pathname === "/main" ? "bg-[var(--hover-button)]" : "hover:bg-[var(--hover-button)]"}`}
                                 onClick={toggleMenu}>
                                 Main
