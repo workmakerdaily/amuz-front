@@ -18,6 +18,7 @@
 ##  기술 스택
 ### 프론트엔드
 - **Next.js (App Router)**
+- **React.js**
 - **TypeScript**
 - **Tailwind CSS**
 - **@hello-pangea/dnd** (드래그 & 드롭)
