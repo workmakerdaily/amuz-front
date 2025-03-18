@@ -38,8 +38,8 @@ const Calendar = () => {
             responseBody.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         const isSuccessed = responseBody !== null && responseBody.code === 'SU';
-
-        if (!isSuccessed) {
+        
+        if (!isSuccessed) { 
             alert(message);
             return;
         }

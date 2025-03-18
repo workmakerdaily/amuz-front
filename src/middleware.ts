@@ -8,7 +8,7 @@ export async function middleware(req: NextRequest) {
 
     // variable: 접근 제한할 경로 설정 //
     const publicPaths = ["/", "/sign-up"];
-    const protectedPaths = ["/main"];
+    const protectedPaths = ["/main", "/calendar"];
 
     // variable: 현재 페이지 상태 확인 //
     const isPublicPage = publicPaths.includes(req.nextUrl.pathname);
