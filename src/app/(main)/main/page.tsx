@@ -40,6 +40,7 @@ const MainPage = () => {
         const message =
             !responseBody ? '서버에 문제가 있습니다.' :
             responseBody.code === 'AF' ? '잘못된 접근입니다.' :
+            responseBody.code === 'VF' ? '목표를 입력하세요.' :
             responseBody.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         const isSuccessed = responseBody !== null && responseBody.code === 'SU';
@@ -71,6 +72,7 @@ const MainPage = () => {
         const message =
             !responseBody ? '서버에 문제가 있습니다.' :
             responseBody.code === 'AF' ? '잘못된 접근입니다.' :
+            responseBody.code === 'NI' ? '존재하지 않는 유저입니다.' :
             responseBody.code === 'NET' ? '존재하지 않는 목표입니다.' :
             responseBody.code === 'NP' ? '권한이 없습니다.' :
             responseBody.code === 'DBE' ? '서버에 문제가 있습니다.' : '수정 완료되었습니다.';
@@ -87,6 +89,7 @@ const MainPage = () => {
         const message =
             !responseBody ? '서버에 문제가 있습니다.' :
             responseBody.code === 'AF' ? '잘못된 접근입니다.' :
+            responseBody.code === 'NI' ? '존재하지 않는 유저입니다.' :
             responseBody.code === 'NET' ? '존재하지 않는 목표입니다.' :
             responseBody.code === 'NP' ? '권한이 없습니다.' :
             responseBody.code === 'DBE' ? '서버에 문제가 있습니다.' : '수정 완료되었습니다.';
@@ -102,8 +105,10 @@ const MainPage = () => {
     const deleteToDoResponse = (responseBody: ResponseDto | null) => {
         const message = !responseBody ? '서버에 문제가 있습니다.' :
             responseBody.code === 'AF' ? '잘못된 접근입니다.' :
-                responseBody.code === 'NRP' ? '게시글이 없습니다.' :
-                    responseBody.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            responseBody.code === 'NI' ? '존재하지 않는 유저입니다.' :
+            responseBody.code === 'NRP' ? '게시글이 없습니다.' :
+            responseBody.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            
         const isSuccessed = responseBody !== null && responseBody.code === 'SU';
 
         if (!isSuccessed) {
@@ -115,7 +120,7 @@ const MainPage = () => {
     // event handler: 할 일 추가 핸들러 //
     const onPostButtonClickHandler = async () => {
         if (!goal.trim()) {
-            alert('목표를 입력해주세요.');
+            alert('목표를 입력하세요.');
             return;
         }
 

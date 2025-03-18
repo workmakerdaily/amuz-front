@@ -49,7 +49,6 @@ const SignUpPage = () => {
 
         const message =
             !responseBody ? '서버에 문제가 있습니다.' :
-            responseBody.code === 'VF' ? '올바른 데이터가 아닙니다.' :
             responseBody.code === 'DI' ? '중복된 아이디입니다.' :
             responseBody.code === 'DBE' ? '서버에 문제가 있습니다.' :
             responseBody.code === 'SU' ? '사용 가능한 아이디입니다.' : '';
@@ -66,7 +65,6 @@ const SignUpPage = () => {
 
         const message =
             !responseBody ? '서버에 문제가 있습니다.' :
-            responseBody.code === 'VF' ? '올바른 데이터가 아닙니다.' :
             responseBody.code === 'DI' ? '중복된 아이디입니다.' :
             responseBody.code === 'DBE' ? '서버에 문제가 있습니다.' :
             responseBody.code === 'SU' ? '가입이 완료되었습니다.' : '';
@@ -81,7 +79,10 @@ const SignUpPage = () => {
 
     // event handler: 아이디 중복 확인 버튼 클릭 핸들러 //
     const onIdCheckClickHandler = () => {
-        if (!userId) return;
+        if (!userId) {
+            alert("아이디를 입력하세요.");
+            return;
+        }
 
         const requestBody: IdCheckRequestDto = {
             userId
