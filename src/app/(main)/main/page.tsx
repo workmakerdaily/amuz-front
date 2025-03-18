@@ -11,8 +11,8 @@ import { getCookie } from "cookies-next";
 import { ACCESS_TOKEN } from "@/constants";
 import { GetToDoListResponseDto } from "@/apis/dto/response/toDo";
 import { ResponseDto } from "@/apis/dto/response";
-import { deleteToDoRequest, getToDoListRequest, patchIsCheckedRequest, patchToDoPriorityRequest, postToDoRequest } from "@/apis";
-import { PatchIsCheckedRequestDto, PostToDoRequestDto } from "@/apis/dto/request/todo";
+import { deleteToDoRequest, getToDoListRequest, patchIsCheckedRequest, patchToDoPriorityRequest, patchToDoRequest, postToDoRequest } from "@/apis";
+import { PatchIsCheckedRequestDto, PatchToDoRequestDto, PostToDoRequestDto } from "@/apis/dto/request/todo";
 import { DragDropContext, Draggable, Droppable, DropResult } from "@hello-pangea/dnd";
 import SmallButton from "@/components/SmallButton";
 
@@ -67,6 +67,24 @@ const MainPage = () => {
             return;
         }
     }
+
+    // function: patch to do response 처리 함수 //
+    const patchToDoResponse = (responseBody: ResponseDto | null) => {
+        const message =
+            !responseBody ? '서버에 문제가 있습니다.' :
+            responseBody.code === 'AF' ? '잘못된 접근입니다.' :
+            responseBody.code === 'NI' ? '존재하지 않는 유저입니다.' :
+            responseBody.code === 'NET' ? '존재하지 않는 목표입니다.' :
+            responseBody.code === 'NP' ? '권한이 없습니다.' :
+            responseBody.code === 'DBE' ? '서버에 문제가 있습니다.' : '수정 완료되었습니다.';
+
+        const isSuccessed = responseBody !== null && responseBody.code === 'SU';
+        if (!isSuccessed) {
+            alert(message);
+            return;
+        }
+    }
+
     // function: patch isChecked response 처리 함수 //
     const patchIsCheckedResponse = (responseBody: ResponseDto | null) => {
         const message =
@@ -141,16 +159,37 @@ const MainPage = () => {
         }
     };
 
-    // event handler: goal 입력 변경 핸들러 //
-    const onGoalChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    // event handler: goal 입력 핸들러 //
+    const onGoalHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setGoal(value);
     }
 
+    // event handler: goal 수정 핸들러 //
+    const onPatchToDoHandler = async (id: number | string, newGoal: string) => {
+        if (!id) {
+            alert("유효한 목표가 아닙니다.");
+            return;
+        }
+
+        if (!newGoal.trim()) {
+            alert("목표를 입력하세요.");
+            return;
+        }
+
+        const requestBody: PatchToDoRequestDto = {
+            goal: newGoal,
+        }
+
+        await patchToDoRequest(requestBody, id, accessToken).then(patchToDoResponse);
+        await getToDoList();
+
+    };
+
     // event handler: patch IsChecked 버튼 클릭 이벤트 처리 //
     const onPatchIsCheckedHandler = async (id: number | string, newChecked: boolean) => {
         if (!id) {
-            alert("유효한 id가 필요합니다.");
+            alert("유효한 목표가 아닙니다.");
             return;
         }
 
@@ -225,7 +264,7 @@ const MainPage = () => {
                     {isPostInput &&
                         <div className="flex items-end">
                             <SmallButton onClick={onPostButtonClickHandler}>추가</SmallButton>
-                            <Input label="" placeholder="목표를 입력해주세요." onChange={onGoalChangeHandler} onKeyDown={onKeyDownHandler} />
+                            <Input label="" placeholder="목표를 입력해주세요." onChange={onGoalHandler} onKeyDown={onKeyDownHandler} />
                         </div>
                     }
                     <button className="cursor-pointer bg-[var(--button)] text-white p-3 rounded-full hover:bg-[var(--hover-button)] transition"
@@ -250,6 +289,7 @@ const MainPage = () => {
                                                     isChecked={todo.isChecked}
                                                     onChecked={() => onPatchIsCheckedHandler(todo.id, !todo.isChecked)}
                                                     onDelete={() => onDeleteButtonClickHandler(todo.id)}
+                                                    onPatch={(newGoal) => onPatchToDoHandler(todo.id, newGoal)}
                                                 />
                                             </div>
                                         )}

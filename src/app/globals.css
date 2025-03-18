@@ -26,6 +26,8 @@ body {
   --gray-2: rgba(60, 60, 60, 0.8);
   --text-link: rgba(204, 119, 34, 1);
   --check-box: rgba(175, 149, 92, 1);
+  --patch-box: rgb(200, 146, 44);
+  --patch-hover-box: rgb(163, 119, 37);
   --clear: rgba(34, 139, 34, 1);
   --error: rgba(220, 20, 60, 1);
   --sunday: rgba(220, 20, 60, 1);

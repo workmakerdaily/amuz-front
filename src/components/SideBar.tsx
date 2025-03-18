@@ -18,6 +18,7 @@ const SideBar = () => {
         router.push("/");
     };
 
+    // render: SideBar 컴포넌트 렌더링 //
     return (
         <aside className="title-font fixed top-0 left-0 h-full w-60 bg-[var(--side-background)] hidden md:flex flex-col text-[rgba(255,245,235,1)] pt-[80px] p-4 z-50">
 

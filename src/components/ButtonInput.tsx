@@ -16,7 +16,7 @@ const ButtonInput = ({ label, ...props }: Props) => {
             <label className="block text-xs">{label}</label>
             <input
                 {...props}
-                className="w-full mt-2 p-2 text-sm outline-none placeholder:text-sm"
+                className="w-full text-md outline-none placeholder:text-sm"
             />
         </div>
     );

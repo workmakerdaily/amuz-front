@@ -3,8 +3,8 @@ import { ResponseDto } from "./dto/response";
 import { IdCheckRequestDto, SignInRequestDto, SignUpRequestDto } from "./dto/request/auth";
 import { SignInResponseDto } from "./dto/response/auth";
 import { GetToDoListResponseDto } from "./dto/response/toDo";
-import { DELETE_TO_DO_API_URL, GET_CALENDAR_DATA_API_URL, GET_TO_DO_LIST_API_URL, ID_CHECK_API_URL, PATCH_IS_CHECKED_API_URL, PATCH_PRIORITY_API_URL, POST_TO_DO_API_URL, SIGN_IN_API_URL, SIGN_UP_API_URL } from "@/constants";
-import { PatchIsCheckedRequestDto, PostToDoRequestDto } from "./dto/request/todo";
+import { DELETE_TO_DO_API_URL, GET_CALENDAR_DATA_API_URL, GET_TO_DO_LIST_API_URL, ID_CHECK_API_URL, PATCH_IS_CHECKED_API_URL, PATCH_PRIORITY_API_URL, PATCH_TO_DO_API_URL, POST_TO_DO_API_URL, SIGN_IN_API_URL, SIGN_UP_API_URL } from "@/constants";
+import { PatchIsCheckedRequestDto, PatchToDoRequestDto, PostToDoRequestDto } from "./dto/request/todo";
 import { GetCalendarDataResponseDto } from "./dto/response/calendar";
 
 
@@ -72,6 +72,15 @@ export const postToDoRequest = async (requestBody: PostToDoRequestDto, accessTok
         .catch(responseErrorHandler);
     return responseBody;
 }
+
+// function: patch to do 수정 요청 함수 //
+export const patchToDoRequest = async (requestBody: PatchToDoRequestDto, id: string | number, accessToken: string) => {
+    const responseBody = await axios.patch(PATCH_TO_DO_API_URL(id), requestBody, bearerAuthorization(accessToken))
+        .then(responseDataHandler<ResponseDto>)
+        .catch(responseErrorHandler);
+    return responseBody;
+}
+
 // function: patch isChecked 수정 요청 함수 //
 export const patchIsCheckedRequest = async (requestBody: PatchIsCheckedRequestDto, id: string | number, accessToken: string) => {
     const responseBody = await axios.patch(PATCH_IS_CHECKED_API_URL(id), requestBody, bearerAuthorization(accessToken))

@@ -20,6 +20,7 @@ export const SIGN_IN_API_URL = `${AUTH_MODULE_URL}/sign-in`;
 // variable: 목표 관련 API //
 export const GET_TO_DO_LIST_API_URL = `${MAIN_MODULE_URL}`;
 export const POST_TO_DO_API_URL = `${MAIN_MODULE_URL}`;
+export const PATCH_TO_DO_API_URL = ( id: number | string ) => `${MAIN_MODULE_URL}/${id}`;
 export const PATCH_IS_CHECKED_API_URL = ( id: number | string ) => `${MAIN_MODULE_URL}/is-check/${id}`;
 export const PATCH_PRIORITY_API_URL = `${MAIN_MODULE_URL}/priority`;
 export const DELETE_TO_DO_API_URL = ( id: number | string ) => `${MAIN_MODULE_URL}/${id}`;
