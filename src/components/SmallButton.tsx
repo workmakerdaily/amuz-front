@@ -7,10 +7,10 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
     children: React.ReactNode;
 }
 
-// component: 버튼 컴포넌트 //
+// component: Small 버튼 컴포넌트 //
 const SmallButton = ({ children, ...props }: Props) => {
 
-    // render: 버튼 컴포넌트 렌더링 //
+    // render: Small 버튼 컴포넌트 렌더링 //
     return (
         <button
             {...props}

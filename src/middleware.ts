@@ -1,23 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 
+// middleware: 페이지 접근 제어 //
 export async function middleware(req: NextRequest) {
 
-    // accessToken 가져오기
+    // variable: accessToken 가져오기 //
     const token = await req.cookies.get("accessToken")?.value;
 
-    // 접근 제한할 경로 설정
-    const publicPaths = ["/", "/sign-up"]; // 로그인한 사용자가 접근하면 안 되는 페이지
-    const protectedPaths = ["/main"]; // 로그인하지 않은 사용자가 접근하면 안 되는 페이지
+    // variable: 접근 제한할 경로 설정 //
+    const publicPaths = ["/", "/sign-up"];
+    const protectedPaths = ["/main"];
 
+    // variable: 현재 페이지 상태 확인 //
     const isPublicPage = publicPaths.includes(req.nextUrl.pathname);
     const isProtectedPage = protectedPaths.includes(req.nextUrl.pathname);
 
-    // 로그인하지 않은 경우 "/main" 접근 제한
     if (!token && isProtectedPage) {
         return NextResponse.redirect(new URL("/", req.url));
     }
 
-    // 로그인한 경우 "/","/sign-up" 접근 제한
     if (token && isPublicPage) {
         return NextResponse.redirect(new URL("/main", req.url));
     }
@@ -25,6 +25,7 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
 }
 
+// config: 미들웨어가 적용될 경로 설정 //
 export const config = {
     matcher: [
         "/((?!api|_next/static|_next/image|favicon.ico|fonts|images).*)",

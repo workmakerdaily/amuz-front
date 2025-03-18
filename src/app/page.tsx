@@ -12,14 +12,21 @@ import { ACCESS_TOKEN, MAIN_PATH, SIGN_IN_PATH, SIGN_UP_PATH } from '@/constants
 import { SignInRequestDto } from '@/apis/dto/request/auth';
 import { signInRequest } from '@/apis';
 
-const SignIn = () => {
+// component: SignInPage 컴포넌트 //
+const SignInPage = () => {
+
+  // variable: router //
   const router = useRouter();
+
+  // state: 입력 필드 값 //
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
 
+  // state: 유효성 메시지 //
   const [userIdMessage, setUserIdMessage] = useState("");
   const [passwordMessage, setPasswordMessage] = useState("");
 
+  // state: 에러 여부 //
   const [userIdMessageError, setUserIdMessageError] = useState(false);
   const [passwordMessageError, setPasswordMessageError] = useState(false);
 
@@ -28,10 +35,10 @@ const SignIn = () => {
     const message =
       !responseBody ? '서버에 문제가 있습니다.' :
         responseBody.code === 'VF' ? '아이디와 비밀번호를 모두 입력하세요.' :
-          responseBody.code === 'SF' ? '로그인 정보가 일치하지 않습니다.' :
-            responseBody.code === 'TCF' ? '서버에 문제가 있습니다.' :
-              responseBody.code === 'DBE' ? '서버에 문제가 있습니다.' :
-              responseBody.code === 'SU' ? '로그인 되었습니다.' : '';
+        responseBody.code === 'SF' ? '로그인 정보가 일치하지 않습니다.' :
+        responseBody.code === 'TCF' ? '서버에 문제가 있습니다.' :
+        responseBody.code === 'DBE' ? '서버에 문제가 있습니다.' :
+        responseBody.code === 'SU' ? '로그인 되었습니다.' : '';
 
     const isSuccessed = responseBody !== null && responseBody.code === 'SU';
     if (!isSuccessed) {
@@ -80,7 +87,10 @@ const SignIn = () => {
 
   // event handler: 로그인 버튼 클릭 핸들러 //
   const onSignInButtonClickHandler = () => {
-    if (!userId || !password) return;
+    if (!userId || !password) {
+      alert("아이디와 비밀번호를 모두 입력해주세요.");
+      return;
+    }
 
     const requestBody: SignInRequestDto = {
       userId,
@@ -147,4 +157,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignInPage;

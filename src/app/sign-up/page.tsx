@@ -12,29 +12,36 @@ import SmallButton from "@/components/SmallButton";
 import ButtonInput from "@/components/ButtonInput";
 import { SIGN_IN_PATH } from "@/constants";
 
-const SignUp = () => {
+// component: SignUpPage 컴포넌트 //
+const SignUpPage = () => {
+
+    // variable: router //
     const router = useRouter();
 
+    // state: 입력 필드 값 //
     const [userId, setUserId] = useState("");
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
 
+    // state: 유효성 메시지 //
     const [userIdMessage, setUserIdMessage] = useState<string>('');
     const [userNameMessage, setUserNameMessage] = useState<string>('');
     const [passwordMessage, setPasswordMessage] = useState<string>('');
     const [passwordConfirmMessage, setPasswordConfirmMessage] = useState<string>('');
 
+    // state: 에러 여부 //
     const [userIdMessageError, setUserIdMessageError] = useState<boolean>(false);
     const [userNameMessageError, setUserNameMessageError] = useState<boolean>(false);
     const [passwordMessageError, setPasswordMessageError] = useState<boolean>(false);
     const [passwordConfirmMessageError, setPasswordConfirmMessageError] = useState<boolean>(false);
 
+    // state: 인증 상태 //
     const [isCheckedUserId, setCheckedUserId] = useState<boolean>(false);
     const [isMatchedPassword, setMatchedPassword] = useState<boolean>(false);
     const [isCheckedPassword, setCheckedPassword] = useState<boolean>(false);
 
-    // 회원가입 가능 여부
+    // variable: 회원가입 가능 여부 //
     const isComplete = userId && isCheckedUserId && userName && password && passwordConfirm;
 
     // function: 아이디 중복 체크 Response 처리 함수 //
@@ -42,10 +49,10 @@ const SignUp = () => {
 
         const message =
             !responseBody ? '서버에 문제가 있습니다.' :
-                responseBody.code === 'VF' ? '올바른 데이터가 아닙니다.' :
-                    responseBody.code === 'DI' ? '중복된 아이디입니다.' :
-                        responseBody.code === 'DBE' ? '서버에 문제가 있습니다.' :
-                            responseBody.code === 'SU' ? '사용 가능한 아이디입니다.' : '';
+            responseBody.code === 'VF' ? '올바른 데이터가 아닙니다.' :
+            responseBody.code === 'DI' ? '중복된 아이디입니다.' :
+            responseBody.code === 'DBE' ? '서버에 문제가 있습니다.' :
+            responseBody.code === 'SU' ? '사용 가능한 아이디입니다.' : '';
 
         const isSuccessed = responseBody !== null && responseBody.code === 'SU';
         setUserIdMessage(message);
@@ -59,10 +66,10 @@ const SignUp = () => {
 
         const message =
             !responseBody ? '서버에 문제가 있습니다.' :
-                responseBody.code === 'VF' ? '올바른 데이터가 아닙니다.' :
-                    responseBody.code === 'DI' ? '중복된 아이디입니다.' :
-                        responseBody.code === 'DBE' ? '서버에 문제가 있습니다.' :
-                            responseBody.code === 'SU' ? '가입이 완료되었습니다.' : '';
+            responseBody.code === 'VF' ? '올바른 데이터가 아닙니다.' :
+            responseBody.code === 'DI' ? '중복된 아이디입니다.' :
+            responseBody.code === 'DBE' ? '서버에 문제가 있습니다.' :
+            responseBody.code === 'SU' ? '가입이 완료되었습니다.' : '';
 
         const isSuccessed = responseBody !== null && responseBody.code === 'SU';
         if (isSuccessed) {
@@ -190,7 +197,7 @@ const SignUp = () => {
         setCheckedPassword(isEqual);
     }, [password, passwordConfirm]);
 
-
+    // render: signUpPage component 렌더링 //
     return (
         <div className="flex min-h-screen items-center justify-center">
             <div className="w-full max-w-md p-6">
@@ -282,4 +289,4 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default SignUpPage;

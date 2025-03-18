@@ -35,6 +35,19 @@ const SideBar = () => {
                             Main
                         </Link>
                     </li>
+
+                    <li>
+                        <Link
+                            href="/calendar"
+                            className={`block px-6 py-3 text-xl font-semibold
+                                ${pathname === "/calendar"
+                                    ? "bg-[var(--hover-button)]"
+                                    : "hover:bg-[var(--hover-button)]"
+                                }`}
+                        >
+                            Calendar
+                        </Link>
+                    </li>
                 </ul>
 
                 <div className="flex-grow"></div>

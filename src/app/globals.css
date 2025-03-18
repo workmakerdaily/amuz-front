@@ -28,6 +28,11 @@ body {
   --check-box: rgba(175, 149, 92, 1);
   --clear: rgba(34, 139, 34, 1);
   --error: rgba(220, 20, 60, 1);
+  --sunday: rgba(220, 20, 60, 1);
+  --saturday: rgba(72, 112, 164, 1);
+  --tool-bar-button: rgba(93, 64, 55, 1);
+  --tool-bar-hover-button: rgba(73, 50, 43, 1);
+  --calendar-event: rgba(175, 149, 92, 1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -39,4 +44,41 @@ body {
 
 .title-font {
   font-family: 'nanummyeongjo', sans-serif;
+}
+
+.fc .fc-toolbar-title {
+  font-family: 'nanummyeongjo', sans-serif;
+}
+
+.fc .fc-toolbar-title {
+  @apply font-bold text-4xl;
+}
+
+.fc .fc-day-sun a {
+  @apply text-[var(--sunday)];
+}
+
+.fc .fc-day-sat a {
+  @apply text-[var(--saturday)];
+}
+
+.fc .fc-toolbar-chunk .fc-button {
+  @apply bg-[var(--tool-bar-button)] border-[var(--tool-bar-button)];
+}
+
+.fc .fc-toolbar-chunk .fc-button:disabled {
+  @apply bg-[var(--tool-bar-button)];
+}
+
+.fc .fc-toolbar-chunk .fc-button:disabled:hover {
+  @apply bg-[var(--tool-bar-button)];
+}
+
+
+.fc .fc-toolbar-chunk .fc-button:hover {
+  @apply bg-[var(--tool-bar-hover-button)]
+}
+
+.fc-event {
+  @apply bg-[var(--calendar-event)] border-[var(--calendar-event)]; 
 }

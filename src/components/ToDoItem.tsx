@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CheckSquare, Square, Trash } from 'lucide-react';
 
+// interface: Props //
 interface Props {
     label: string;
     isChecked: boolean;
@@ -8,8 +9,10 @@ interface Props {
     onDelete: () => void;
 }
 
+// component: ToDoItem 컴포넌트 //
 const ToDoItem = ({ label, isChecked, onChecked, onDelete }: Props) => {
 
+    // event handler: 삭제 버튼 클릭 핸들러 //
     const deleteHandler = () => {
         const deleteAlert = window.confirm('정말 삭제하시겠습니까?');
         if (deleteAlert) {
@@ -17,6 +20,7 @@ const ToDoItem = ({ label, isChecked, onChecked, onDelete }: Props) => {
         }
     };
 
+    // render: ToDoItem 컴포넌트 렌더링 //
     return (
         <div className="flex items-center justify-between border-b border-[var(--gray-1)] hover:border-[var(--gray-2)] bg-white p-4">
             <div className="flex items-center gap-3">
